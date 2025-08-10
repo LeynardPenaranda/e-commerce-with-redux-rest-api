@@ -21,11 +21,16 @@ const ProductDialogImage = ({ src, alt }: { src: string; alt: string }) => {
             />
           </div>
         </DialogTrigger>
-        <DialogContent className="p-0 rounded-none sm:max-w-[1025px]">
+        <DialogContent
+          className="p-0 rounded-none sm:max-w-[725px] max-h-[80vh] object-center overflow-y-auto 
+             [&::-webkit-scrollbar]:w-2 
+             [&::-webkit-scrollbar-track]:bg-transparent 
+             [&::-webkit-scrollbar-thumb]:bg-black"
+        >
           <DialogHeader>
             <DialogTitle className="absolute"></DialogTitle>
             <DialogDescription>
-              <img src={src} alt={alt} className="w-full h-full" />
+              <img src={src} alt={alt} className="w-full h-full object-fill" />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

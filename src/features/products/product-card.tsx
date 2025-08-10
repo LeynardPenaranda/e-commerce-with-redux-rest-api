@@ -22,7 +22,7 @@ const ProductCard = ({ product }: { product: Product[] }) => {
         return (
           <MotionCard
             key={item.id}
-            className="p-0 h-[30rem] 3xl:w-[20rem] cursor-pointer rounded-none"
+            className="p-0 sm:h-[30rem] 3xl:w-[20rem] cursor-pointer rounded-none"
             whileHover={{
               y: -3,
               scale: 1.02,

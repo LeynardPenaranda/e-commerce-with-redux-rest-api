@@ -1,9 +1,19 @@
 import { ShoppingCart, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ToogleLeftSideBar from "./toogle-left-sidebar";
 import SearchInput from "./toogle-search";
 
 const Header = () => {
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/products", label: "Products" },
+    { to: "/about", label: "About" },
+    { to: "/creator", label: "Creator" },
+  ];
+
   return (
     <header className="border-b flex items-center justify-around">
       <div className="flex items-center space-x-5">
@@ -15,11 +25,23 @@ const Header = () => {
           />
         </div>
         <ToogleLeftSideBar />
-        <div className="hidden sm:flex items-center space-x-2">
-          <Link to="/">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/about">About</Link>
-          <Link to="/creator">Creator</Link>
+        <div className="hidden sm:flex items-center space-x-4 text-gray-500">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.to;
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={
+                  isActive
+                    ? "font-bold text-black"
+                    : "text-gray-500 hover:text-black"
+                }
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
       <SearchInput />
@@ -29,7 +51,7 @@ const Header = () => {
             <ShoppingCart className="w-4 h-4" />
           </Link>
         </div>
-        <div className="hidden sm:flex ">
+        <div className="hidden sm:flex">
           <User />
         </div>
       </div>

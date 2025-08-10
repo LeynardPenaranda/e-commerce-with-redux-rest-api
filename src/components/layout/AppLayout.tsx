@@ -11,7 +11,7 @@ const AppLayout = () => {
     <div className="grid grid-rows-[4rem_1fr_4rem] min-h-[90vh]">
       {isLoading && <Loader />}
       <Header />
-      <main>
+      <main className="mb-20 sm:mb-0">
         <Outlet />
       </main>
       <Footer />

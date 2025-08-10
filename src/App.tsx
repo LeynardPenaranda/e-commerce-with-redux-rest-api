@@ -12,10 +12,12 @@ import Products, {
 } from "./features/products/Products";
 import About from "./components/pages/about";
 import Creator from "./components/pages/creator";
+import Error from "./components/ui/error";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",

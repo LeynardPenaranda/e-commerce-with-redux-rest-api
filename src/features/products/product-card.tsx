@@ -43,7 +43,7 @@ const ProductCard = ({ product }: { product: Product[] }) => {
             <div className="w-full h-[15rem] object-center">
               <ProductImages src={item.image} alt={item.name} />
             </div>
-            <div>
+            <div className="px-2">
               <ProductRating
                 value={item.rating}
                 caption={`(${item.rating}) Reviews`}

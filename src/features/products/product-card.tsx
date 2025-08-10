@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { PackagePlus } from "lucide-react";
+import ProductImages from "./Product-images";
 
 const MotionCard = motion(Card);
 
@@ -40,11 +41,7 @@ const ProductCard = ({ product }: { product: Product[] }) => {
             onClick={() => setSelectedId(item.id)}
           >
             <div className="w-full h-[15rem] object-center">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="object-cover h-full w-full "
-              />
+              <ProductImages src={item.image} alt={item.name} />
             </div>
             <div>
               <ProductRating
@@ -55,8 +52,10 @@ const ProductCard = ({ product }: { product: Product[] }) => {
             <CardTitle className="text-center">{item.name}</CardTitle>
             <CardContent className=" h-[6rem] grid grid-cols-[1fr_6rem] p-0">
               <div className="flex flex-col gap-1 ">
-                <div className=" w-[90%] text-center">
-                  <p className="text-sm font-medium">{item.description}</p>
+                <div className=" w-[90%]">
+                  <p className="text-sm font-medium px-2 text-start">
+                    {item.description}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center justify-center">

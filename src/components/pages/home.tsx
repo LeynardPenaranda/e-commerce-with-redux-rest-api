@@ -1,5 +1,11 @@
+import AnimationWrapper from "../animation/animation-wrapper-page";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <AnimationWrapper>
+      <div>Home</div>
+    </AnimationWrapper>
+  );
 };
 
 export default Home;

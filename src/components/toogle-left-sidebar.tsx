@@ -7,8 +7,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetDescription,
-  SheetClose,
 } from "./ui/sheet";
+import Navbar from "./navbar";
 
 const ToogleLeftSideBar = () => {
   return (
@@ -21,18 +21,15 @@ const ToogleLeftSideBar = () => {
         </SheetTrigger>
         <SheetContent side="left">
           <SheetHeader>
-            <SheetTitle>Sheet Title</SheetTitle>
-            <SheetDescription>
-              This is a description inside the sheet.
-            </SheetDescription>
+            <SheetTitle></SheetTitle>
+            <SheetDescription></SheetDescription>
           </SheetHeader>
           <div>
-            {/* Your content here */}
-            <p>Here is some content inside the sheet.</p>
+            <Navbar
+              className="flex flex-col gap-5"
+              classNameLink="w-full text-center m-0 "
+            />
           </div>
-          <SheetClose asChild>
-            <button className="btn mt-4">Close</button>
-          </SheetClose>
         </SheetContent>
       </Sheet>
     </div>

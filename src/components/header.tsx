@@ -1,19 +1,10 @@
 import { ShoppingCart, User } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ToogleLeftSideBar from "./toogle-left-sidebar";
 import SearchInput from "./toogle-search";
+import Navbar from "./navbar";
 
 const Header = () => {
-  const location = useLocation();
-  const pathname = location.pathname;
-
-  const navLinks = [
-    { to: "/", label: "Home" },
-    { to: "/products", label: "Products" },
-    { to: "/about", label: "About" },
-    { to: "/creator", label: "Creator" },
-  ];
-
   return (
     <header className=" flex items-center justify-around bg-white/20 backdrop-blur-md">
       <div className="flex items-center space-x-5">
@@ -25,24 +16,7 @@ const Header = () => {
           />
         </div>
         <ToogleLeftSideBar />
-        <div className="hidden sm:flex items-center space-x-4 text-gray-500">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.to;
-            return (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={
-                  isActive
-                    ? "font-bold text-black"
-                    : "text-gray-500 hover:text-black"
-                }
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </div>
+        <Navbar className="hidden sm:flex" />
       </div>
       <SearchInput />
       <div className="flex items-center space-x-2">

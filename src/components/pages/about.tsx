@@ -39,8 +39,21 @@ const About = () => {
           transition={{
             duration: 0.5,
           }}
-          className="w-[97%] h-[50rem] border mt-20 rounded-t-4xl bg-gray-700"
-        ></motion.div>
+          className="w-[97%] h-[50rem] border mt-20 rounded-t-4xl bg-gray-700 flex items-center overflow-hidden"
+        >
+          <div className="flex flex-col md:flex-row w-full h-[15rem] items-center justify-around">
+            <img
+              src="/images/Banner2.png"
+              alt="Banner"
+              className="max-w-full h-auto md:w-1/2"
+            />
+            <img
+              src="/images/me.png"
+              alt="Me"
+              className="max-w-full h-auto md:w-1/3"
+            />
+          </div>
+        </motion.div>
       </div>
     </AnimationWrapper>
   );

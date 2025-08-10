@@ -15,7 +15,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="border-b flex items-center justify-around">
+    <header className=" flex items-center justify-around bg-white/20 backdrop-blur-md">
       <div className="flex items-center space-x-5">
         <div>
           <img
@@ -48,11 +48,11 @@ const Header = () => {
       <div className="flex items-center space-x-2">
         <div className="flex items-center px-5">
           <Link to="cart">
-            <ShoppingCart className="w-4 h-4" />
+            <ShoppingCart className="w-4 h-4 drop-shadow-[0_4px_6px_rgba(255,255,255,0.9)]" />
           </Link>
         </div>
         <div className="hidden sm:flex">
-          <User />
+          <User className="drop-shadow-[0_4px_6px_rgba(255,255,255,0.9)]" />
         </div>
       </div>
     </header>

@@ -13,7 +13,9 @@ import type { RootState } from "store";
 import { addQty, removeFromCart, removeQty } from "./cartSlice";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { formatMoney } from "@/lib/utils";
+import Pagination from "@/components/pagination";
 
 const Cart = () => {
   const { cart } = useSelector((state: RootState) => state.cart, shallowEqual);
@@ -21,8 +23,14 @@ const Cart = () => {
 
   const [loadingAddId, setLoadingAddId] = useState<number | null>(null);
   const [loadingRemoveId, setLoadingRemoveId] = useState<number | null>(null);
-  const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemPerPage = 5;
 
+  const lastItemIndex = currentPage * itemPerPage;
+  const firstItemIndex = lastItemIndex - itemPerPage;
+  const currentItems = cart.slice(firstItemIndex, lastItemIndex);
+
+  const dispatch = useDispatch();
   const handleAddQty = (id: number) => {
     setLoadingAddId(id);
     setTimeout(() => {
@@ -77,15 +85,17 @@ const Cart = () => {
                 </TableCell>
               </TableRow>
             )}
-            {cart.map((item) => (
+            {currentItems.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>
                   <img src={item.image} alt={item.name} className="w-25" />
                 </TableCell>
                 <TableCell>{item.name}</TableCell>
-                <TableCell>${item.price}</TableCell>
+                <TableCell>{formatMoney(item.price)}</TableCell>
                 <TableCell>{item.quantity}</TableCell>
-                <TableCell>${item.totalPrice! * item.quantity}</TableCell>
+                <TableCell>
+                  {formatMoney(item.totalPrice! * item.quantity)}
+                </TableCell>
                 <TableCell className="align-middle">
                   <div className="flex items-center justify-center gap-5">
                     <Button onClick={() => handleRemoveQty(item.id)}>
@@ -109,29 +119,41 @@ const Cart = () => {
             ))}
           </TableBody>
         </Table>
-        <div className="flex justify-end w-full">
-          <Card className="w-2xl">
-            <CardContent>
-              <h2 className="text-lg font-bold">Cart Summary</h2>
-              <div className="flex justify-between">
-                <span>Total Items:</span>
-                <span>
-                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span>Total Price:</span>
-                <span>
-                  $
-                  {cart.reduce(
-                    (acc, item) => acc + item.totalPrice! * item.quantity,
-                    0
-                  )}
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {cart.length > 0 && (
+          <div className="flex justify-around w-full">
+            <Pagination
+              totalItems={cart.length}
+              itemsPerPage={itemPerPage}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
+            <Card className="w-2xl">
+              <CardContent>
+                <h2 className="text-lg font-bold">Cart Summary</h2>
+                <div className="flex justify-between">
+                  <span>Total Items:</span>
+                  <span>
+                    {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Total Price:</span>
+                  <span>
+                    {formatMoney(
+                      cart.reduce(
+                        (acc, item) => acc + item.totalPrice! * item.quantity,
+                        0
+                      )
+                    )}
+                  </span>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button>Checkout</Button>
+              </CardFooter>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );

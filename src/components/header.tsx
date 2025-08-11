@@ -63,7 +63,7 @@ const Header = () => {
                   {totalQty}
                 </span>
               ) : (
-                <span className="absolute top-[-20px] right-[-10px] px-2 text-white rounded-full bg-gray-600">
+                <span className="absolute top-[-2px] right-[-20px] px-2 text-white rounded-full bg-gray-600">
                   9+
                 </span>
               )}
@@ -88,13 +88,13 @@ const Header = () => {
                   y: -20,
                 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="hidden md:flex md:flex-col items-center justify-center gap-15 fixed top-15 right-10 w-[38rem] h-[25rem] bg-white rounded-2xl z-[999] border-3"
+                className="hidden md:flex md:flex-col items-center justify-center gap-15 fixed top-15 right-10 w-[38rem] h-[35rem] bg-white rounded-2xl z-[999] border-3"
               >
                 <div className="flex items-center justify-center gap-2">
                   Your Cart{" "}
                   {!username ? <p>(Enter your name)</p> : <Username />}
                 </div>
-                <div className="w-full h-[15rem] border overflow-auto">
+                <div className="w-full">
                   <HeaderTable cart={cart} />
                 </div>
               </motion.div>,

@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -17,6 +16,8 @@ import { Button } from "./ui/button";
 import { Loader2, Minus, Plus } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { formatMoney } from "@/lib/utils";
+import { Card, CardContent } from "./ui/card";
 const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
   const dispatch = useDispatch();
   const [isLoadingAddId, setIsLoadingAddId] = useState<number | null>(null);
@@ -48,58 +49,86 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
   };
 
   return (
-    <Table>
-      <TableCaption>A list of your cart items.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Image</TableHead>
-          <TableHead>Item</TableHead>
-          <TableHead>Price</TableHead>
-          <TableHead>Quantity</TableHead>
-          <TableHead>Total Price</TableHead>
-          <TableHead className="w-[100px] text-center">Action</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {cart.length === 0 && (
-          <TableRow>
-            <TableCell colSpan={7} className="text-center">
-              Your cart is empty.
-            </TableCell>
-          </TableRow>
-        )}
-        {cart.map((item) => (
-          <TableRow key={item.id}>
-            <TableCell>
-              <img src={item.image} alt={item.name} />
-            </TableCell>
-            <TableCell>{item.name}</TableCell>
-            <TableCell>${item.price}</TableCell>
-            <TableCell>{item.quantity}</TableCell>
-            <TableCell>${item.totalPrice! * item.quantity}</TableCell>
-            <TableCell className="text-center align-middle">
-              <div className="flex items-center justify-center gap-5">
-                <Button onClick={() => handleRemoveQty(item.id)}>
-                  {isLoadingRemoveId === item.id ? (
-                    <Loader2 className="animate-spin" />
-                  ) : (
-                    <Minus />
-                  )}
-                </Button>
-                <span>{item.quantity}</span>
-                <Button onClick={() => handleAddQty(item.id)}>
-                  {isLoadingAddId === item.id ? (
-                    <Loader2 className="animate-spin" />
-                  ) : (
-                    <Plus />
-                  )}
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div className="flex flex-col gap-15">
+      <div className="w-full h-[15rem] border overflow-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Image</TableHead>
+              <TableHead>Item</TableHead>
+              <TableHead>Price</TableHead>
+              <TableHead>Quantity</TableHead>
+              <TableHead>SubTotal Price</TableHead>
+              <TableHead className="w-[100px] text-center">Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {cart.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={7} className="text-center">
+                  Your cart is empty.
+                </TableCell>
+              </TableRow>
+            )}
+            {cart.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>
+                  <img src={item.image} alt={item.name} />
+                </TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{formatMoney(item.price)}</TableCell>
+                <TableCell>{item.quantity}</TableCell>
+                <TableCell>
+                  {formatMoney(item.totalPrice! * item.quantity)}
+                </TableCell>
+                <TableCell className="text-center align-middle">
+                  <div className="flex items-center justify-center gap-5">
+                    <Button onClick={() => handleRemoveQty(item.id)}>
+                      {isLoadingRemoveId === item.id ? (
+                        <Loader2 className="animate-spin" />
+                      ) : (
+                        <Minus />
+                      )}
+                    </Button>
+                    <span>{item.quantity}</span>
+                    <Button onClick={() => handleAddQty(item.id)}>
+                      {isLoadingAddId === item.id ? (
+                        <Loader2 className="animate-spin" />
+                      ) : (
+                        <Plus />
+                      )}
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      <div>
+        <Card className="rounded-none">
+          <CardContent>
+            <h2 className="text-lg font-bold">Cart Summary</h2>
+            <p className="text-muted-foreground">go to cart to checkout</p>
+            <div className="flex justify-between">
+              <span>Total Items:</span>
+              <span>{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Total Price:</span>
+              <span className="font-bold">
+                {formatMoney(
+                  cart.reduce(
+                    (acc, item) => acc + item.totalPrice! * item.quantity,
+                    0
+                  )
+                )}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   SheetDescription,
 } from "./ui/sheet";
 import Navbar from "./navbar";
+import Username from "@/features/user/username";
 
 const ToogleLeftSideBar = () => {
   return (
@@ -24,11 +25,12 @@ const ToogleLeftSideBar = () => {
             <SheetTitle></SheetTitle>
             <SheetDescription></SheetDescription>
           </SheetHeader>
-          <div>
+          <div className="flex flex-col-reverse items-center">
             <Navbar
               className="flex flex-col gap-5"
               classNameLink="w-full text-center m-0 "
             />
+            <Username />
           </div>
         </SheetContent>
       </Sheet>

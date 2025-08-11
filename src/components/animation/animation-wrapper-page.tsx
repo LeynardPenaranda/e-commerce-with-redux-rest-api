@@ -14,7 +14,7 @@ const AnimationWrapper = ({ children }: { children: React.ReactNode }) => {
         exit={{ scaleY: 0 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         style={{ originY: 0 }}
-        className="fixed top-0 left-0 w-full h-screen bg-gray-900 origin-top"
+        className="fixed top-0 left-0 w-full h-screen bg-black/30 backdrop-blur-md origin-top"
       />
       {children}
     </>

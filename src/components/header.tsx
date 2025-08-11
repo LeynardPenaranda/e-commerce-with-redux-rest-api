@@ -1,8 +1,9 @@
-import { ShoppingCart, User } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import ToogleLeftSideBar from "./toogle-left-sidebar";
 import SearchInput from "./toogle-search";
 import Navbar from "./navbar";
+import Username from "@/features/user/username";
 
 const Header = () => {
   return (
@@ -26,7 +27,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="hidden sm:flex">
-          <User className="drop-shadow-[0_4px_6px_rgba(255,255,255,0.9)]" />
+          <Username />
         </div>
       </div>
     </header>

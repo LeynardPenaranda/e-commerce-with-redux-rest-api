@@ -56,7 +56,6 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
           <TableHead>Item</TableHead>
           <TableHead>Price</TableHead>
           <TableHead>Quantity</TableHead>
-          <TableHead>Unit Price</TableHead>
           <TableHead>Total Price</TableHead>
           <TableHead className="w-[100px] text-center">Action</TableHead>
         </TableRow>
@@ -77,24 +76,25 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
             <TableCell>{item.name}</TableCell>
             <TableCell>${item.price}</TableCell>
             <TableCell>{item.quantity}</TableCell>
-            <TableCell>${item.price}</TableCell>
-            <TableCell>${item.totalPrice}</TableCell>
-            <TableCell className="flex items-center justify-center gap-5">
-              <Button onClick={() => handleRemoveQty(item.id)}>
-                {isLoadingRemoveId === item.id ? (
-                  <Loader2 className="animate-spin" />
-                ) : (
-                  <Minus />
-                )}
-              </Button>
-              <span>{item.quantity}</span>
-              <Button onClick={() => handleAddQty(item.id)}>
-                {isLoadingAddId === item.id ? (
-                  <Loader2 className="animate-spin" />
-                ) : (
-                  <Plus />
-                )}
-              </Button>
+            <TableCell>${item.totalPrice! * item.quantity}</TableCell>
+            <TableCell className="text-center align-middle">
+              <div className="flex items-center justify-center gap-5">
+                <Button onClick={() => handleRemoveQty(item.id)}>
+                  {isLoadingRemoveId === item.id ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    <Minus />
+                  )}
+                </Button>
+                <span>{item.quantity}</span>
+                <Button onClick={() => handleAddQty(item.id)}>
+                  {isLoadingAddId === item.id ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    <Plus />
+                  )}
+                </Button>
+              </div>
             </TableCell>
           </TableRow>
         ))}

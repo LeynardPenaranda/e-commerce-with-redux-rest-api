@@ -88,7 +88,7 @@ const Header = () => {
                   y: -20,
                 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="hidden md:flex md:flex-col items-center justify-center gap-15 fixed top-15 right-10 w-[25rem] h-[25rem] bg-white rounded-2xl z-[999] border-3"
+                className="hidden md:flex md:flex-col items-center justify-center gap-15 fixed top-15 right-10 w-[38rem] h-[25rem] bg-white rounded-2xl z-[999] border-3"
               >
                 <div className="flex items-center justify-center gap-2">
                   Your Cart{" "}

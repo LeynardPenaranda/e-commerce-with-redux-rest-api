@@ -7,6 +7,7 @@ const ProductFilters = () => {
 
   const categories = ["Computer Parts", "Home Devices", "Clothing"];
   const priceRanges = [
+    { label: "$10 - $50", value: "10-50" },
     { label: "$50 - $100", value: "50-100" },
     { label: "$100 - $150", value: "100-150" },
     { label: "$150 - $200", value: "150-200" },

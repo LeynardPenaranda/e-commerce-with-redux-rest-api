@@ -13,6 +13,7 @@ import type { RootState } from "store";
 import { addQty, removeFromCart, removeQty } from "./cartSlice";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Cart = () => {
   const { cart } = useSelector((state: RootState) => state.cart, shallowEqual);
@@ -61,9 +62,8 @@ const Cart = () => {
               <TableHead>Item</TableHead>
               <TableHead>Price</TableHead>
               <TableHead>Quantity</TableHead>
-              <TableHead>Unit Price</TableHead>
-              <TableHead>Total Price</TableHead>
-              <TableHead>Action</TableHead>
+              <TableHead>SubTotal Price</TableHead>
+              <TableHead className="text-center">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -85,29 +85,53 @@ const Cart = () => {
                 <TableCell>{item.name}</TableCell>
                 <TableCell>${item.price}</TableCell>
                 <TableCell>{item.quantity}</TableCell>
-                <TableCell>${item.price}</TableCell>
-                <TableCell>${item.totalPrice}</TableCell>
-                <TableCell className="flex items-center justify-center gap-5">
-                  <Button onClick={() => handleRemoveQty(item.id)}>
-                    {loadingRemoveId === item.id ? (
-                      <Loader2 className="animate-spin" />
-                    ) : (
-                      <Minus />
-                    )}
-                  </Button>
-                  <span>{item.quantity}</span>
-                  <Button onClick={() => handleAddQty(item.id)}>
-                    {loadingAddId === item.id ? (
-                      <Loader2 className="animate-spin" />
-                    ) : (
-                      <Plus />
-                    )}
-                  </Button>
+                <TableCell>${item.totalPrice! * item.quantity}</TableCell>
+                <TableCell className="align-middle">
+                  <div className="flex items-center justify-center gap-5">
+                    <Button onClick={() => handleRemoveQty(item.id)}>
+                      {loadingRemoveId === item.id ? (
+                        <Loader2 className="animate-spin" />
+                      ) : (
+                        <Minus />
+                      )}
+                    </Button>
+                    <span>{item.quantity}</span>
+                    <Button onClick={() => handleAddQty(item.id)}>
+                      {loadingAddId === item.id ? (
+                        <Loader2 className="animate-spin" />
+                      ) : (
+                        <Plus />
+                      )}
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        <div className="flex justify-end w-full">
+          <Card className="w-2xl">
+            <CardContent>
+              <h2 className="text-lg font-bold">Cart Summary</h2>
+              <div className="flex justify-between">
+                <span>Total Items:</span>
+                <span>
+                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Total Price:</span>
+                <span>
+                  $
+                  {cart.reduce(
+                    (acc, item) => acc + item.totalPrice! * item.quantity,
+                    0
+                  )}
+                </span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

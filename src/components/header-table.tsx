@@ -50,7 +50,7 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
       <TableCaption>A list of your cart items.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Item Image</TableHead>
+          <TableHead>Image</TableHead>
           <TableHead>Item</TableHead>
           <TableHead>Price</TableHead>
           <TableHead>Quantity</TableHead>
@@ -62,7 +62,7 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
       <TableBody>
         {cart.length === 0 && (
           <TableRow>
-            <TableCell colSpan={6} className="text-center">
+            <TableCell colSpan={7} className="text-center">
               Your cart is empty.
             </TableCell>
           </TableRow>

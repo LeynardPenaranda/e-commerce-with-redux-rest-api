@@ -19,19 +19,21 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
   const dispatch = useDispatch();
-  const [isLoadingAdd, setIsLoadingAdd] = useState(false);
-  const [isLoadingRemove, setIsLoadingRemove] = useState(false);
+  const [isLoadingAddId, setIsLoadingAddId] = useState<number | null>(null);
+  const [isLoadingRemoveId, setIsLoadingRemoveId] = useState<number | null>(
+    null
+  );
 
   const handleAddQty = (id: number) => {
-    setIsLoadingAdd(true);
+    setIsLoadingAddId(id);
     setTimeout(() => {
       dispatch(addQty(id));
-      setIsLoadingAdd(false);
+      setIsLoadingAddId(null);
     }, 300);
   };
 
   const handleRemoveQty = (id: number) => {
-    setIsLoadingRemove(true);
+    setIsLoadingRemoveId(id);
     setTimeout(() => {
       const item = cart.find((item) => item.id === id);
       if (!item) return;
@@ -41,7 +43,7 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
       } else {
         dispatch(removeQty(id));
       }
-      setIsLoadingRemove(false);
+      setIsLoadingRemoveId(null);
     }, 300);
   };
 
@@ -79,7 +81,7 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
             <TableCell>${item.totalPrice}</TableCell>
             <TableCell className="flex items-center justify-center gap-5">
               <Button onClick={() => handleRemoveQty(item.id)}>
-                {isLoadingRemove ? (
+                {isLoadingRemoveId === item.id ? (
                   <Loader2 className="animate-spin" />
                 ) : (
                   <Minus />
@@ -87,7 +89,11 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
               </Button>
               <span>{item.quantity}</span>
               <Button onClick={() => handleAddQty(item.id)}>
-                {isLoadingAdd ? <Loader2 className="animate-spin" /> : <Plus />}
+                {isLoadingAddId === item.id ? (
+                  <Loader2 className="animate-spin" />
+                ) : (
+                  <Plus />
+                )}
               </Button>
             </TableCell>
           </TableRow>

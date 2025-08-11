@@ -27,7 +27,7 @@ const Pagination = ({
           className="cursor-pointer"
           disabled={page === currentPage}
         >
-          {page}
+          Page - {page}
         </Button>
       ))}
     </div>

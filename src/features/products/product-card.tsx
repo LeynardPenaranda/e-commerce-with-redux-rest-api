@@ -6,8 +6,8 @@ import { formatMoney } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { PackagePlus } from "lucide-react";
 import ProductImages from "./Product-images";
+import AddToCardButton from "./product-button-add-cart";
 
 const MotionCard = motion(Card);
 
@@ -40,7 +40,7 @@ const ProductCard = ({ product }: { product: Product[] }) => {
             transition={{ type: "spring", stiffness: 250, damping: 20 }}
             onClick={() => setSelectedId(item.id)}
           >
-            <div className="w-full h-[15rem] object-center">
+            <div className="w-full h-[15rem] object-center z-10">
               <ProductImages src={item.image} alt={item.name} />
             </div>
             <div className="px-2">
@@ -62,7 +62,7 @@ const ProductCard = ({ product }: { product: Product[] }) => {
                 <p className="text-lg font-bold">{formatMoney(item.price)}</p>
               </div>
             </CardContent>
-            <div className="grid grid-cols-[120px_1fr]">
+            <div className="flex w-full">
               <div>
                 <Button
                   variant="secondary"
@@ -72,11 +72,17 @@ const ProductCard = ({ product }: { product: Product[] }) => {
                   <Link to={`/products/${item.id}`}>View Product</Link>
                 </Button>
               </div>
-              <div>
-                <Button className="w-full rounded-none">
-                  <PackagePlus />
-                  Add to Cart
-                </Button>
+              <div className="flex-1">
+                <AddToCardButton
+                  product={{
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    quantity: 1,
+                    totalPrice: item.price * 1,
+                    image: item.image,
+                  }}
+                />
               </div>
             </div>
           </MotionCard>

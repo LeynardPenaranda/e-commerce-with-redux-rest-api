@@ -8,13 +8,13 @@ import {
 import ProductRating from "./product-rating";
 import { formatMoney } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { PackagePlus } from "lucide-react";
 import ProductDialogImage from "./product-dialog-image";
+import AddToCardButton from "./product-button-add-cart";
 const ProductId = () => {
   const product: Product = useLoaderData();
   const navigate = useNavigate();
   return (
-    <div className=" max-w-6xl mx-auto h-[90vh] grid md:grid-cols-2 mt-5 gap-5">
+    <div className=" max-w-6xl mx-auto h-[90vh] grid md:grid-cols-2 mt-5 gap-5 mb-40 md:mb-0">
       <div>
         <div>
           <ProductDialogImage src={product.image} alt={product.name} />
@@ -22,10 +22,19 @@ const ProductId = () => {
         <div className="mt-4 mx-2 flex items-center justify-center gap-2">
           <ProductRating value={product.rating} /> {product.rating} Reviews
         </div>
-        <div className="flex items-center justify-start mt-5">
-          <Button className="w-50 mx-2">
-            <PackagePlus /> Add to Cart
-          </Button>
+        <div className="flex items-center justify-center md:justify-start mt-5">
+          <div className="w-[80%] md:w-[50%]">
+            <AddToCardButton
+              product={{
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+                totalPrice: product.price * 1,
+                image: product.image,
+              }}
+            />
+          </div>
         </div>
       </div>
       <div>

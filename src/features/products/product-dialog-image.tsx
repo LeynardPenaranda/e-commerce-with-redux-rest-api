@@ -14,11 +14,7 @@ const ProductDialogImage = ({ src, alt }: { src: string; alt: string }) => {
       <Dialog>
         <DialogTrigger asChild>
           <div className="w-full h-[20rem] overflow-hidden object-center">
-            <ProductImages
-              src={src}
-              alt={alt}
-              className="rounded-2xl cursor-pointer"
-            />
+            <ProductImages src={src} alt={alt} className=" cursor-pointer" />
           </div>
         </DialogTrigger>
         <DialogContent

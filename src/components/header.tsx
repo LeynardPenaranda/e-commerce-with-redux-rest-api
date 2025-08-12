@@ -1,7 +1,6 @@
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import ToogleLeftSideBar from "./toogle-left-sidebar";
-import SearchInput from "./toogle-search";
 import Navbar from "./navbar";
 import Username from "@/features/user/username";
 import { shallowEqual, useSelector } from "react-redux";
@@ -49,7 +48,7 @@ const Header = () => {
         <ToogleLeftSideBar />
         <Navbar className="hidden sm:flex" />
       </div>
-      <SearchInput />
+
       <div className="flex items-center space-x-5">
         <motion.div
           onHoverStart={() => setHover(true)}

@@ -17,6 +17,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { formatMoney } from "@/lib/utils";
 import Pagination from "@/components/pagination";
 import { AnimatePresence, motion } from "framer-motion";
+import CheckOutButton from "./checkout-button-dialog";
 
 const Cart = () => {
   const { cart } = useSelector((state: RootState) => state.cart, shallowEqual);
@@ -159,7 +160,7 @@ const Cart = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Checkout</Button>
+              <CheckOutButton />
             </CardFooter>
           </Card>
         </div>

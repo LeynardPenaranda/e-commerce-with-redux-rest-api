@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { formatMoney } from "@/lib/utils";
 import { Card, CardContent } from "./ui/card";
+import { Link } from "react-router-dom";
 const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
   const dispatch = useDispatch();
   const [isLoadingAddId, setIsLoadingAddId] = useState<number | null>(null);
@@ -49,7 +50,7 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
   };
 
   return (
-    <div className="flex flex-col gap-15">
+    <div className="flex flex-col gap-1">
       <div className="w-full h-[15rem] border overflow-auto">
         <Table>
           <TableHeader>
@@ -128,6 +129,13 @@ const HeaderTable = ({ cart }: { cart: CartItem[] }) => {
           </CardContent>
         </Card>
       </div>
+      {cart.length > 0 && (
+        <div className="flex items-center justify-center">
+          <Button asChild className="w-2xs">
+            <Link to="/cart">Go to Cart</Link>
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

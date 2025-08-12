@@ -25,7 +25,15 @@ const Home = () => {
           )}
         </div>
         <HomeCarousel />
-        Home
+        <div className="w-full h-[15rem]">
+          <h1 className="text-center font-medium text-3xl text-shadow-lg">
+            Shop with Passion, Click with Purpose
+          </h1>
+          <p className="text-center text-lg mt-4 text-shadow-lg">
+            We blend passion, design, and web enthusiasm to create a smooth and
+            exciting online marketplace.
+          </p>
+        </div>
       </div>
     </AnimationWrapper>
   );

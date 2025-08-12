@@ -3,12 +3,17 @@ import AnimationWrapper from "../animation/animation-wrapper-page";
 import HomeCarousel from "../home-carousel";
 import { useSelector } from "react-redux";
 import Username from "@/features/user/username";
+import HomeListCards from "../home-list-cards";
+import { fetchProducts } from "@/lib/apiProducts";
+import { useLoaderData } from "react-router-dom";
+import type { Product } from "@/lib/types";
 
 const Home = () => {
+  const products = useLoaderData() as Product[];
   const username = useSelector((state: RootState) => state.user.username);
   return (
     <AnimationWrapper>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto mb-50">
         <div className="mb-10 h-35 flex items-center">
           {!username ? (
             <h1 className="font-medium text-2xl">
@@ -34,9 +39,17 @@ const Home = () => {
             exciting online marketplace.
           </p>
         </div>
+
+        <HomeListCards products={products} />
       </div>
     </AnimationWrapper>
   );
 };
+
+/* eslint-disable react-refresh/only-export-components */
+export async function loader() {
+  const products = await fetchProducts();
+  return products;
+}
 
 export default Home;

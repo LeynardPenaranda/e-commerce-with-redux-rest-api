@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./components/pages/home";
+import Home, { loader as homeLoader } from "./components/pages/home";
 import Cart from "./features/cart/cart";
 import PlaceOrder from "./features/order/place-order";
 import CheckOutOrder from "./features/order/check-out-order";
@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        loader: homeLoader,
       },
       {
         path: "/about",

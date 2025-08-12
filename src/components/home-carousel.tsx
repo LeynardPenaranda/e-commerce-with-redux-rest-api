@@ -23,9 +23,9 @@ const HomeCarousel = () => {
       opts={{ loop: true }}
       plugins={[
         AutoPlay({
-          delay: 3000,
-          stopOnInteraction: true,
-          stopOnMouseEnter: true,
+          delay: 3500,
+          stopOnInteraction: false,
+          stopOnMouseEnter: false,
         }),
       ]}
     >
